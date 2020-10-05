@@ -26,20 +26,36 @@ def judge(player, computer):
         return 'Win'
 
 
-print('Welcome to Rock Paper Scissors game!')
+print('Starting the Rock Paper Scissors game!')
 player_name = input('Please enter your name: ')
 
-print('Pick a hand: (0: Rock, 1: Paper, 2: Scissors)')
-player_hand = int(input('Please enter a number (0-2): '))
+player_hand=False
+while player_hand==False:
+    
+    print('Pick a hand: (0: Rock, 1: Paper, 2: Scissors)')
+    player_hand = int(input('Please enter a number (0-2): '))
+    if validate(player_hand):
+        computer_hand = random.randint(0, 2)
 
-if validate(player_hand):
-    computer_hand = random.randint(0, 2)
+        print_hand(player_hand, player_name)
+        print_hand(computer_hand, 'Computer')
 
-    print_hand(player_hand, player_name)
-    print_hand(computer_hand, 'Computer')
+        result = judge(player_hand, computer_hand)
 
-    result = judge(player_hand, computer_hand)
+        print('Result: ' + result)
 
-    print('Result: ' + result)
-else:
-    print('Please enter a valid number')
+        again=str(input("Do you want to play again (Y/N): "))
+        if again =='Y':
+            player_hand=False
+        else:
+            break
+        
+    else:
+        print('Please enter a valid number')
+    # In else, player_hand was set to true, so set its value again to false for the loop to continue
+    player_hand=False
+
+    
+    
+    
+
